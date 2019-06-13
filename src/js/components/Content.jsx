@@ -7,6 +7,7 @@ const ContentBody = styled.div`
   justify-content: center;
   border-bottom: 2px solid #D8D8D8;
   background-color: rgba(100,100,100,0.5);
+  min-height: 500px;
 `
 
 class Content extends Component {

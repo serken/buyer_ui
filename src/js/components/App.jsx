@@ -1,7 +1,11 @@
-import React, { Component } from "react";
-import Header from "./Header.jsx";
-import Footer from "./Footer.jsx";
-import Content from "./Content.jsx";
+import React, { Component } from "react"
+import Header from "./Header.jsx"
+import Footer from "./Footer.jsx"
+import Content from "./Content.jsx"
+import SignIn from "./SignIn.jsx"
+import Registration from "./Registration.jsx"
+
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import styled from 'styled-components'
 
@@ -20,10 +24,12 @@ class App extends Component {
     return (
       <Body>
         <Header />
-        <Content />
+        <Route exact path="/" component={Content} />
+        <Route exact path="/sign_in" component={SignIn} />
+        <Route exact path="/registration" component={Registration} />
         <Footer />
       </Body>
     );
   }
 }
-export default App;
+export default App

@@ -16,9 +16,10 @@ class Header extends Component {
   render() {
     return (
       <HeaderBody>
-        Header here
-        <br />
-        <Button href='/'>Root</Button>
+        <Button to='/'>Home</Button>
+        <Button to='/sign_in'>Sign In</Button>
+        <Button to='/registration'>Register</Button>
+        <Button to='/tenders'>Tenders</Button>
       </HeaderBody>
     );
   }

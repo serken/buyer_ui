@@ -13,7 +13,6 @@ const FooterBody = styled.div`
 class Footer extends Component {
   render() {
     return (
-
       <FooterBody>
         Footer here
       </FooterBody>

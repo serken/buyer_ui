@@ -1,8 +1,8 @@
-import { takeEvery, call, put } from "redux-saga/effects"
-import { SIGN_IN_REQUESTED, AUTH_RECEIVED } from "../constants/action-types"
+import { takeEvery, call, put, push } from "redux-saga/effects"
+import { AUTH_REQUESTED, AUTH_RECEIVED } from "../constants/action-types"
 
 export default function* watcherSaga() {
-  yield takeEvery(SIGN_IN_REQUESTED, processSignIn)
+  yield takeEvery(AUTH_REQUESTED, processSignIn)
 }
 
 function* processSignIn(action) {
@@ -11,7 +11,15 @@ function* processSignIn(action) {
 }
 
 function postData(payload) {
-  return fetch("http://localhost:3000/sessions/sign_in", { method: 'POST', params: payload, credentials: 'include' }).then(response =>
+  return fetch("http://localhost:3000/sign_in",
+    {
+      method: 'POST',
+      body: JSON.stringify(payload),
+      credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+          'Content-Type': 'application/json',
+        }
+    }).then(response =>
     response.json()
   );
 }

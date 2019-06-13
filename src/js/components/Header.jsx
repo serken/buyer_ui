@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from 'styled-components'
-
+import { connect } from "react-redux"
 import Button from './shared/Button.jsx'
 
 const HeaderBody = styled.div`
@@ -12,16 +12,28 @@ const HeaderBody = styled.div`
   min-height: 50px;
 `
 
+function mapStateToProps(state) {
+  const { user } = state
+  return { user: user }
+}
+
 class Header extends Component {
   render() {
     return (
       <HeaderBody>
         <Button to='/'>Home</Button>
-        <Button to='/sign_in'>Sign In</Button>
-        <Button to='/registration'>Register</Button>
+        { !this.props.user &&
+          <Button to='/sign_in'>Sign In</Button>
+        }
+        { !this.props.user &&
+          <Button to='/registration'>Register</Button>
+        }
+        { this.props.user &&
+          <Button to='/sign_out'>Sign out</Button>
+        }
         <Button to='/tenders'>Tenders</Button>
       </HeaderBody>
     );
   }
 }
-export default Header;
+export default connect(mapStateToProps)(Header);

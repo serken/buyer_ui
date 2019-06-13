@@ -1,21 +1,26 @@
-import React from "react";
-import List from "./List.jsx";
-import Form from "./Form.jsx";
-import Post from "./Posts.jsx";
-const App = () => (
-  <div className="row mt-5">
-    <div className="col-md-4 offset-md-1">
-      <h2>Articles</h2>
-      <List />
-    </div>
-    <div className="col-md-4 offset-md-1">
-      <h2>Add a new article</h2>
-      <Form />
-    </div>
-    <div className="col-md-4 offset-md-1">
-      <h2>API posts</h2>
-      <Post />
-    </div>
-  </div>
-);
+import React, { Component } from "react";
+import Header from "./Header.jsx";
+import Footer from "./Footer.jsx";
+import Content from "./Content.jsx";
+
+import styled from 'styled-components'
+
+const Body = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+`
+
+
+class App extends Component {
+  render() {
+    return (
+      <Body>
+        <Header />
+        <Content />
+        <Footer />
+      </Body>
+    );
+  }
+}
 export default App;

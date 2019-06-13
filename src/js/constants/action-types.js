@@ -1,1 +1,2 @@
-export const ADD_ARTICLE = "ADD_ARTICLE";
+export const SIGN_IN_REQUESTED = "SIGN_IN_REQUESTED"
+export const AUTH_RECEIVED = "AUTH_RECEIVED"

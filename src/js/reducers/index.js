@@ -1,12 +1,12 @@
-import { ADD_ARTICLE } from "../constants/action-types";
+import { AUTH_RECEIVED } from "../constants/action-types";
 const initialState = {
-  articles: [],
+  user: null,
   remoteArticles: []
 };
 function rootReducer(state = initialState, action) {
-  if (action.type === ADD_ARTICLE) {
+  if (action.type === AUTH_RECEIVED) {
     return Object.assign({}, state, {
-      articles: state.articles.concat(action.payload)
+      user: action.payload.user
     });
   }
   if (action.type === "DATA_LOADED") {

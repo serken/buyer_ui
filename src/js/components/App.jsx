@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import Header from "./Header.jsx"
 import Footer from "./Footer.jsx"
 import Content from "./Content.jsx"
-import SignIn from "./SignIn.jsx"
+import SignInForm from "./SignInForm.jsx"
 import Registration from "./Registration.jsx"
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
@@ -25,7 +25,7 @@ class App extends Component {
       <Body>
         <Header />
         <Route exact path="/" component={Content} />
-        <Route exact path="/sign_in" component={SignIn} />
+        <Route exact path="/sign_in" component={SignInForm} />
         <Route exact path="/registration" component={Registration} />
         <Footer />
       </Body>

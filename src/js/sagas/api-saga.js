@@ -1,17 +1,17 @@
-import { takeEvery, call, put } from "redux-saga/effects";
+import { takeEvery, call, put } from "redux-saga/effects"
+import { SIGN_IN_REQUESTED, AUTH_RECEIVED } from "../constants/action-types"
+
 export default function* watcherSaga() {
-  yield takeEvery("DATA_REQUESTED", workerSaga);
+  yield takeEvery(SIGN_IN_REQUESTED, processSignIn)
 }
-function* workerSaga() {
-  try {
-    const payload = yield call(getData);
-    yield put({ type: "DATA_LOADED", payload });
-  } catch (e) {
-    yield put({ type: "API_ERRORED", payload: e });
-  }
+
+function* processSignIn(action) {
+  const response = yield call(postData, action.payload)
+  yield put({ type: AUTH_RECEIVED, response: response })
 }
-function getData() {
-  return fetch("https://jsonplaceholder.typicode.com/posts").then(response =>
+
+function postData(payload) {
+  return fetch("http://localhost:3000/sessions/sign_in", { method: 'POST', params: payload, credentials: 'include' }).then(response =>
     response.json()
   );
 }

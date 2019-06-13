@@ -9,6 +9,9 @@ const Body = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
+  position: absolute;
+  width: 100%;
+  height: 100%;
 `
 
 

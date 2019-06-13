@@ -5,6 +5,8 @@ const ContentBody = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
+  border-bottom: 2px solid #D8D8D8;
+  background-color: rgba(100,100,100,0.5);
 `
 
 class Content extends Component {

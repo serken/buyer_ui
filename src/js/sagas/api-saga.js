@@ -17,7 +17,7 @@ function* processSignOut(action) {
 }
 
 function signIn(payload) {
-  return fetch("http://localhost:3000/sessions/auth",
+  return fetch("http://localhost:3000/auth",
     {
       method: 'POST',
       body: JSON.stringify(payload),
@@ -33,7 +33,7 @@ function signIn(payload) {
 }
 
 function signOut () {
-  return fetch('http://localhost:3000/sessions/auth', {
+  return fetch('http://localhost:3000/auth', {
     method: 'DELETE',
     credentials: 'include'
   }).then(res => res.json()).catch((error) => {})

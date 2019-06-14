@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from 'styled-components'
+import { connect } from "react-redux"
 
 const ContentBody = styled.div`
   flex: 1;
@@ -10,13 +11,29 @@ const ContentBody = styled.div`
   min-height: 500px;
 `
 
+
+function mapStateToProps(state) {
+  const { user } = state
+  return { user: user }
+}
+
 class Content extends Component {
   render() {
     return (
       <ContentBody>
-        Content here
+        { this.props.user &&
+          <div>
+            Welcome, {this.props.user.email}
+          </div>
+        }
+        {
+          !this.props.user &&
+          <div>
+            Welcome, please sign in!
+          </div>
+        }
       </ContentBody>
     );
   }
 }
-export default Content;
+export default connect(mapStateToProps)(Content);

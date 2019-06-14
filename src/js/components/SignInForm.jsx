@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from 'styled-components'
 import { requestSignIn } from "../actions/index"
 import { connect } from "react-redux"
+import Button from './shared/Button.jsx'
 
 const ContentBody = styled.div`
   flex: 1;
@@ -42,7 +43,6 @@ class Form extends Component {
   }
 
   onSignIn(e) {
-    e.preventDefault()
     this.props.signIn(this.state)
   }
 
@@ -51,8 +51,8 @@ class Form extends Component {
       <ContentBody>
         <div>
           login/email: <input value={this.state.login} onChange={this.onLoginChange}/><br/>
-          password: <input value={this.state.password} onChange={this.onPasswordChange}/>
-          <button onClick={this.onSignIn}> Submit</button>
+          password: <input value={this.state.password} onChange={this.onPasswordChange}/><br/>
+          <Button onClick={this.onSignIn} to="/"> Submit</Button>
         </div>
       </ContentBody>
     );

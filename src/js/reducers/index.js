@@ -1,4 +1,4 @@
-import { AUTH_RECEIVED } from "../constants/action-types";
+import { AUTH_RECEIVED, SESSION_RESTORE_RECEIVED, LOGOUT_RECEIVED } from "../constants/action-types";
 
 const initialState = {
   user: null,
@@ -6,7 +6,7 @@ const initialState = {
 };
 
 function rootReducer(state = initialState, action) {
-  if (action.type === AUTH_RECEIVED) {
+  if (action.type === AUTH_RECEIVED || action.type === SESSION_RESTORE_RECEIVED) {
     if(action.response.error) {
       return Object.assign({}, state, {
         user: null
@@ -16,9 +16,9 @@ function rootReducer(state = initialState, action) {
       user: action.response
     });
   }
-  if (action.type === "DATA_LOADED") {
+  if (action.type === LOGOUT_RECEIVED) {
     return Object.assign({}, state, {
-      remoteArticles: state.remoteArticles.concat(action.response)
+      user: null
     });
   }
   return state;

@@ -7,6 +7,7 @@ import Registration from "./Registration.jsx"
 
 import { connect } from "react-redux"
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
+import { requestSessionRestore } from "../actions/index"
 
 import styled from 'styled-components'
 
@@ -19,6 +20,12 @@ const Body = styled.div`
   height: 100%;
 `
 
+function mapDispatchToProps(dispatch) {
+  return {
+    sessionRestore: params => dispatch(requestSessionRestore())
+  };
+}
+
 function mapStateToProps(state) {
   const { user } = state
   return { user: user }
@@ -29,10 +36,11 @@ class App extends Component {
     super()
   }
 
-  render() {
-    if(this.props.user)
-      return <Redirect exact to="/" />
+  componentWillMount() {
+    this.props.sessionRestore()
+  }
 
+  render() {
     return (
       <Body>
         <Header user={this.props.user}/>
@@ -46,4 +54,4 @@ class App extends Component {
     );
   }
 }
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)

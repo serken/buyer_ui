@@ -15,9 +15,11 @@ function postData(payload) {
     {
       method: 'POST',
       body: JSON.stringify(payload),
-      credentials: 'same-origin', // include, *same-origin, omit
+      credentials: 'include', // include, *same-origin, omit
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Access-Control-Allow-Origin': '*'
         }
     }).then(response =>
     response.json()

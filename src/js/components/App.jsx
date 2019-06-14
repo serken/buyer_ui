@@ -6,7 +6,7 @@ import SignInForm from "./SignInForm.jsx"
 import Registration from "./Registration.jsx"
 
 import { connect } from "react-redux"
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 
 import styled from 'styled-components'
 
@@ -30,16 +30,17 @@ class App extends Component {
   }
 
   render() {
+    if(this.props.user)
+      return <Redirect exact to="/" />
+
     return (
       <Body>
         <Header user={this.props.user}/>
-        <Route exact path="/" component={Content} />
-        { !this.props.user &&
+        <Switch>
+          <Route exact path="/" component={Content} />
           <Route exact path="/sign_in" component={SignInForm} />
-        }
-        { !this.props.user &&
           <Route exact path="/registration" component={Registration} />
-        }
+        </Switch>
         <Footer />
       </Body>
     );

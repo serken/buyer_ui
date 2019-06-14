@@ -9,7 +9,7 @@ import App from "./js/components/App.jsx"
 render(
   <Provider store={store}>
     <Router>
-      <Route path="/" component={App} />
+      <App />
     </Router>
   </Provider>,
   document.getElementById("app")

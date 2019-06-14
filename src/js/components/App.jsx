@@ -27,7 +27,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  const { user } = state
+  const { user, userCreated } = state
   return { user: user }
 }
 
@@ -45,7 +45,7 @@ class App extends Component {
       <Body>
         <Header user={this.props.user}/>
         <Switch>
-          <Route exact path="/" component={Content} user={this.props.user} />
+          <Route exact path="/" component={Content} />
           <Route exact path="/sign_in" component={SignInForm} />
           <Route exact path="/registration" component={Registration} />
         </Switch>

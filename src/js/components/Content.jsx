@@ -13,8 +13,8 @@ const ContentBody = styled.div`
 
 
 function mapStateToProps(state) {
-  const { user } = state
-  return { user: user }
+  const { user, userCreated } = state
+  return { user: user, userCreated: userCreated }
 }
 
 class Content extends Component {
@@ -27,9 +27,15 @@ class Content extends Component {
           </div>
         }
         {
-          !this.props.user &&
+          !this.props.user && !this.props.userCreated &&
           <div>
             Welcome, please sign in!
+          </div>
+        }
+        {
+          !this.props.user && this.props.userCreated &&
+          <div>
+            You have been registered successfully
           </div>
         }
       </ContentBody>

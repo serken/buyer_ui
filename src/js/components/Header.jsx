@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from 'styled-components'
 import { connect } from "react-redux"
 import Button from './shared/Button.jsx'
+import { requestSignOut } from "../actions/index"
 
 const HeaderBody = styled.div`
   height: 50px;
@@ -11,6 +12,12 @@ const HeaderBody = styled.div`
   background-color: rgba(10,10,10,0.1);
   min-height: 50px;
 `
+
+function mapDispatchToProps(dispatch) {
+  return {
+    signOut: params => dispatch(requestSignOut())
+  };
+}
 
 function mapStateToProps(state) {
   const { user } = state
@@ -36,4 +43,4 @@ class Header extends Component {
     );
   }
 }
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -7,7 +7,7 @@ import Registration from "./Registration.jsx"
 import Users from "./Users.jsx"
 
 import { connect } from "react-redux"
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
 import { requestSessionRestore } from "../actions/index"
 
 import styled from 'styled-components'
@@ -43,16 +43,16 @@ class App extends Component {
 
   render() {
     return (
+      <BrowserRouter>
       <Body>
         <Header user={this.props.user}/>
-        <Switch>
-          <Route exact path="/" component={Content} />
-          <Route exact path="/sign_in" component={SignInForm} />
-          <Route exact path="/registration" component={Registration} />
-          <Route exact path="/users" component={Users} />
-        </Switch>
+        <Route exact path="/" component={Content} />
+        <Route exact path="/sign_in" component={SignInForm} />
+        <Route exact path="/registration" component={Registration} />
+        <Route exact path="/users" component={Users} />
         <Footer />
       </Body>
+      </BrowserRouter>
     );
   }
 }

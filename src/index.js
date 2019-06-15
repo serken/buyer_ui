@@ -8,9 +8,7 @@ import App from "./js/components/App.jsx"
 
 render(
   <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
+    <App />
   </Provider>,
   document.getElementById("app")
 )

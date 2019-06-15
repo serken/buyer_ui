@@ -52,17 +52,17 @@ class Users extends Component {
             <thead>
 
                {keys.map((key, v) => {
-                  return <td>{key}</td>
+                  return <th>{key}</th>
                })
 
                }
             </thead>
             {this.props.users.map((u, i) => {
-               return <tr>
+               return <tbody><tr>
                   {keys.map((key, v) => {
                     return <td>{u[key]}</td>
                   })}
-                  </tr>
+                  </tr></tbody>
             })}
             </table>
           </div>

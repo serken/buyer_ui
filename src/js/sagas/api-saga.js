@@ -11,7 +11,9 @@ import { AUTH_REQUESTED,
   USERS_REQUESTED,
   USERS_RECEIVED,
   CATEGORIES_REQUESTED,
-  CATEGORIES_RECEIVED
+  CATEGORIES_RECEIVED,
+  TENDERS_RECEIVED,
+  TENDERS_REQUESTED
 } from "../constants/action-types"
 
 export default function* watcherSaga() {
@@ -21,6 +23,7 @@ export default function* watcherSaga() {
   yield takeEvery(CREATE_USER_REQUESTED, createUser)
   yield takeEvery(USERS_REQUESTED, fetchUsers)
   yield takeEvery(CATEGORIES_REQUESTED, fetchCategories)
+  yield takeEvery(TENDERS_REQUESTED, fetchTenders)
 }
 
 function* processSignIn(action) {
@@ -51,4 +54,9 @@ function* fetchUsers() {
 function* fetchCategories() {
   const response = yield call(api.getCategories)
   yield put({ type: CATEGORIES_RECEIVED, response: response })
+}
+
+function* fetchTenders() {
+  const response = yield call(api.getTenders)
+  yield put({ type: TENDERS_RECEIVED, response: response })
 }

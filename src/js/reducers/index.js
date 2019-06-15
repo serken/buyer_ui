@@ -4,14 +4,16 @@ import {
   LOGOUT_RECEIVED,
   CREATE_USER_RECEIVED,
   USERS_RECEIVED,
-  CATEGORIES_RECEIVED
+  CATEGORIES_RECEIVED,
+  TENDERS_RECEIVED
 } from "../constants/action-types";
 
 const initialState = {
   user: null,
   userCreated: null,
   users: [],
-  categories: []
+  categories: [],
+  tenders: []
 };
 
 function rootReducer(state = initialState, action) {
@@ -56,6 +58,17 @@ function rootReducer(state = initialState, action) {
     }
     return Object.assign({}, state, {
       categories: action.response
+    });
+  }
+
+  if(action.type === TENDERS_RECEIVED) {
+    if(action.response.error) {
+      return Object.assign({}, state, {
+        tenders: []
+      });
+    }
+    return Object.assign({}, state, {
+      tenders: action.response
     });
   }
 

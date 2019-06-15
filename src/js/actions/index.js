@@ -4,7 +4,8 @@ import {
   SESSION_RESTORE_REQUESTED,
   CREATE_USER_REQUESTED,
   USERS_REQUESTED,
-  CATEGORIES_REQUESTED
+  CATEGORIES_REQUESTED,
+  TENDERS_REQUESTED
 } from "../constants/action-types";
 
 export function requestSignIn(payload) {
@@ -42,5 +43,11 @@ export function usersRequest() {
 export function fetchCategories() {
   return {
     type: CATEGORIES_REQUESTED
+  }
+}
+
+export function tendersRequest() {
+  return {
+    type: TENDERS_REQUESTED
   }
 }

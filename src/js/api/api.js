@@ -46,3 +46,7 @@ export const signOut = function() {
 export const getCategories = function() {
   return makeRequest('categories')
 }
+
+export const getTenders = function() {
+  return makeRequest('tenders')
+}

@@ -5,6 +5,7 @@ import Content from "./Content.jsx"
 import SignInForm from "./SignInForm.jsx"
 import Registration from "./Registration.jsx"
 import Users from "./Users.jsx"
+import Tender from "./Tender.jsx"
 
 import { connect } from "react-redux"
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
@@ -52,6 +53,7 @@ class App extends Component {
         <Route exact path="/sign_in" component={SignInForm} />
         <Route exact path="/registration" component={Registration} />
         <Route exact path="/users" component={Users} />
+        <Route exact path="/tenders" component={Tender} />
         <Footer />
       </Body>
       </BrowserRouter>

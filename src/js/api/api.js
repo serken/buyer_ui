@@ -23,12 +23,16 @@ export const getUsers = function() {
   return makeRequest('users')
 }
 
-export const restore = function(payload) {
-  return makeRequest('auth')
+export const updateUser = function(payload) {
+  return makeRequest('users', 'POST', payload)
 }
 
-export const createUserRequest = function(payload) {
+export const createUser = function(payload) {
   return makeRequest('users', 'POST', payload)
+}
+
+export const restore = function(payload) {
+  return makeRequest('auth')
 }
 
 export const signIn = function(payload) {
@@ -37,4 +41,8 @@ export const signIn = function(payload) {
 
 export const signOut = function() {
   return makeRequest('auth', 'DELETE')
+}
+
+export const getCategories = function() {
+  return makeRequest('categories')
 }

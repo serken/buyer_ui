@@ -8,7 +8,7 @@ import Users from "./Users.jsx"
 
 import { connect } from "react-redux"
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
-import { requestSessionRestore } from "../actions/index"
+import { requestSessionRestore, fetchCategories } from "../actions/index"
 
 import styled from 'styled-components'
 
@@ -23,7 +23,8 @@ const Body = styled.div`
 
 function mapDispatchToProps(dispatch) {
   return {
-    sessionRestore: params => dispatch(requestSessionRestore())
+    sessionRestore: params => dispatch(requestSessionRestore()),
+    fetchCategories: params => dispatch(fetchCategories())
   };
 }
 
@@ -39,6 +40,7 @@ class App extends Component {
 
   componentWillMount() {
     this.props.sessionRestore()
+    this.props.fetchCategories()
   }
 
   render() {

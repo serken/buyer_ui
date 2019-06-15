@@ -1,4 +1,11 @@
-import { AUTH_REQUESTED, LOGOUT_REQUESTED, SESSION_RESTORE_REQUESTED, CREATE_USER_REQUESTED, USERS_REQUESTED } from "../constants/action-types";
+import {
+  AUTH_REQUESTED,
+  LOGOUT_REQUESTED,
+  SESSION_RESTORE_REQUESTED,
+  CREATE_USER_REQUESTED,
+  USERS_REQUESTED,
+  CATEGORIES_REQUESTED
+} from "../constants/action-types";
 
 export function requestSignIn(payload) {
   return {
@@ -29,5 +36,11 @@ export function createUserRequest(payload) {
 export function usersRequest() {
   return {
     type: USERS_REQUESTED
+  }
+}
+
+export function fetchCategories() {
+  return {
+    type: CATEGORIES_REQUESTED
   }
 }

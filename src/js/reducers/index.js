@@ -3,13 +3,15 @@ import {
   SESSION_RESTORE_RECEIVED,
   LOGOUT_RECEIVED,
   CREATE_USER_RECEIVED,
-  USERS_RECEIVED
+  USERS_RECEIVED,
+  CATEGORIES_RECEIVED
 } from "../constants/action-types";
 
 const initialState = {
   user: null,
   userCreated: null,
-  users: []
+  users: [],
+  categories: []
 };
 
 function rootReducer(state = initialState, action) {
@@ -46,6 +48,16 @@ function rootReducer(state = initialState, action) {
     });
   }
 
+  if(action.type === CATEGORIES_RECEIVED) {
+    if(action.response.error) {
+      return Object.assign({}, state, {
+        categories: []
+      });
+    }
+    return Object.assign({}, state, {
+      categories: action.response
+    });
+  }
 
   if (action.type === LOGOUT_RECEIVED) {
     return Object.assign({}, state, {

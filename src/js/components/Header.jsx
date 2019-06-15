@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import styled from 'styled-components'
 import { connect } from "react-redux"
 import Button from './shared/Button.jsx'
+//import Button from '@material-ui/core/Button';
+
 import { requestSignOut } from "../actions/index"
 
 const HeaderBody = styled.div`

@@ -9,7 +9,9 @@ import { AUTH_REQUESTED,
   CREATE_USER_REQUESTED,
   CREATE_USER_RECEIVED,
   USERS_REQUESTED,
-  USERS_RECEIVED
+  USERS_RECEIVED,
+  CATEGORIES_REQUESTED,
+  CATEGORIES_RECEIVED
 } from "../constants/action-types"
 
 export default function* watcherSaga() {
@@ -18,6 +20,7 @@ export default function* watcherSaga() {
   yield takeEvery(SESSION_RESTORE_REQUESTED, restoreSession)
   yield takeEvery(CREATE_USER_REQUESTED, createUser)
   yield takeEvery(USERS_REQUESTED, fetchUsers)
+  yield takeEvery(CATEGORIES_REQUESTED, fetchCategories)
 }
 
 function* processSignIn(action) {
@@ -36,11 +39,16 @@ function* restoreSession(action) {
 }
 
 function* createUser(action) {
-  const response = yield call(api.createUserRequest, action.payload)
+  const response = yield call(api.createUser, action.payload)
   yield put({ type: CREATE_USER_RECEIVED, response: response })
 }
 
 function* fetchUsers() {
   const response = yield call(api.getUsers)
   yield put({ type: USERS_RECEIVED, response: response })
+}
+
+function* fetchCategories() {
+  const response = yield call(api.getCategories)
+  yield put({ type: CATEGORIES_RECEIVED, response: response })
 }

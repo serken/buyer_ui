@@ -38,6 +38,9 @@ class Header extends Component {
         { this.props.user &&
           <Button onClick={this.props.signOut} to="/">Sign out</Button>
         }
+        { this.props.user &&
+          <Button to="/users">Users list</Button>
+        }
         <Button to='/tenders'>Tenders</Button>
       </HeaderBody>
     );

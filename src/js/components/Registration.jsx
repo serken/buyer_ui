@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { createUserRequest } from "../actions/index"
 import { connect } from "react-redux"
 import Button from './shared/Button.jsx'
+import { Redirect } from 'react-router-dom'
 
 const ContentBody = styled.div`
   flex: 1;
@@ -25,7 +26,8 @@ class Form extends Component {
     this.state = {
       login: '',
       password: '',
-      email: ''
+      email: '',
+      redirect: false
     }
     this.onLoginChange = this.onLoginChange.bind(this)
     this.onEmailChange = this.onEmailChange.bind(this)
@@ -49,17 +51,25 @@ class Form extends Component {
   }
 
   createUser(e) {
-    this.props.createUser(this.state)
+    if(this.state.login == '' || this.state.password == '' || this.state.email == ''){
+      this.setState({redirect: false})
+    } else {
+      this.setState({redirect: true})
+      this.props.createUser(this.state)
+    }
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect push to="/" />
+    }
     return (
       <ContentBody>
         <div>
           login: <input value={this.state.login} onChange={this.onLoginChange}/><br/>
           email: <input value={this.state.email} onChange={this.onEmailChange}/><br/>
           password: <input value={this.state.password} onChange={this.onPasswordChange}/><br/>
-          <Button onClick={this.createUser} to="/"> Submit</Button>
+          <Button onClick={this.createUser}> Submit</Button>
         </div>
       </ContentBody>
     );

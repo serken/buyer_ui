@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import styled from 'styled-components'
+import styled , { css } from 'styled-components'
 import { requestSignIn } from "../actions/index"
 import { connect } from "react-redux"
 import Button from './shared/Button.jsx'
+import { Redirect } from 'react-router-dom'
 
 const ContentBody = styled.div`
   flex: 1;
@@ -11,6 +12,10 @@ const ContentBody = styled.div`
   border-bottom: 2px solid #D8D8D8;
   background-color: rgba(100,100,100,0.5);
   min-height: 500px;
+`
+
+const StyledInput = styled.input`
+  border: ${props => props.error ? "1px solid red" : "none"}
 `
 
 function mapDispatchToProps(dispatch) {
@@ -24,7 +29,12 @@ class Form extends Component {
     super()
     this.state = {
       login: '',
-      password: ''
+      password: '',
+      errors: {
+        login: false,
+        password: false
+      },
+      redirect: false
     }
     this.onLoginChange = this.onLoginChange.bind(this)
     this.onPasswordChange = this.onPasswordChange.bind(this)
@@ -43,16 +53,25 @@ class Form extends Component {
   }
 
   onSignIn(e) {
-    this.props.signIn(this.state)
+    if(this.state.login == '' || this.state.password == ''){
+      this.setState({ errors: { login: this.state.login == '', password: this.state.errors.password == '' }})
+      this.setState({redirect: false})
+    } else {
+      this.props.signIn(this.state)
+      this.setState({redirect: true})
+    }
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect push to="/" />
+    }
     return (
       <ContentBody>
         <div>
-          login/email: <input value={this.state.login} onChange={this.onLoginChange}/><br/>
-          password: <input value={this.state.password} onChange={this.onPasswordChange}/><br/>
-          <Button onClick={this.onSignIn} to="/"> Submit</Button>
+          login/email: <StyledInput error={this.state.errors.login} value={this.state.login} onChange={this.onLoginChange}/><br/>
+          password: <StyledInput error={this.state.errors.password} value={this.state.password} onChange={this.onPasswordChange}/><br/>
+          <Button onClick={this.onSignIn}> Submit</Button>
         </div>
       </ContentBody>
     );

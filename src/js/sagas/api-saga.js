@@ -6,7 +6,9 @@ import { AUTH_REQUESTED,
   SESSION_RESTORE_REQUESTED,
   SESSION_RESTORE_RECEIVED,
   CREATE_USER_REQUESTED,
-  CREATE_USER_RECEIVED
+  CREATE_USER_RECEIVED,
+  USERS_REQUESTED,
+  USERS_RECEIVED
 } from "../constants/action-types"
 
 export default function* watcherSaga() {
@@ -14,6 +16,7 @@ export default function* watcherSaga() {
   yield takeEvery(LOGOUT_REQUESTED, processSignOut)
   yield takeEvery(SESSION_RESTORE_REQUESTED, restoreSession)
   yield takeEvery(CREATE_USER_REQUESTED, createUser)
+  yield takeEvery(USERS_REQUESTED, fetchUsers)
 }
 
 function* processSignIn(action) {
@@ -34,6 +37,26 @@ function* restoreSession(action) {
 function* createUser(action) {
   const response = yield call(createUserRequest, action.payload)
   yield put({ type: CREATE_USER_RECEIVED, response: response })
+}
+
+function* fetchUsers() {
+  const response = yield call(getUsers)
+  yield put({ type: USERS_RECEIVED, response: response })
+}
+
+function getUsers() {
+  return fetch("http://localhost:3000/users",
+    {
+      method: 'GET',
+      credentials: 'include', // include, *same-origin, omit
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        }
+    }).then(response =>
+    response.json()
+  ).catch((error) => {});
 }
 
 function restore(payload) {

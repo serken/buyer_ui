@@ -1,9 +1,15 @@
-import { AUTH_RECEIVED, SESSION_RESTORE_RECEIVED, LOGOUT_RECEIVED, CREATE_USER_RECEIVED } from "../constants/action-types";
+import {
+  AUTH_RECEIVED,
+  SESSION_RESTORE_RECEIVED,
+  LOGOUT_RECEIVED,
+  CREATE_USER_RECEIVED,
+  USERS_RECEIVED
+} from "../constants/action-types";
 
 const initialState = {
   user: null,
   userCreated: null,
-  remoteArticles: []
+  users: []
 };
 
 function rootReducer(state = initialState, action) {
@@ -28,6 +34,18 @@ function rootReducer(state = initialState, action) {
       userCreated: true
     });
   }
+
+  if(action.type === USERS_RECEIVED) {
+    if(action.response.error) {
+      return Object.assign({}, state, {
+        users: []
+      });
+    }
+    return Object.assign({}, state, {
+      users: action.response
+    });
+  }
+
 
   if (action.type === LOGOUT_RECEIVED) {
     return Object.assign({}, state, {

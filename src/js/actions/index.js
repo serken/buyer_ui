@@ -5,7 +5,9 @@ import {
   CREATE_USER_REQUESTED,
   USERS_REQUESTED,
   CATEGORIES_REQUESTED,
-  TENDERS_REQUESTED
+  TENDERS_REQUESTED,
+  CREATE_TENDER_REQUESTED,
+  CREATE_TENDER_RECEIVED
 } from "../constants/action-types";
 
 export function requestSignIn(payload) {
@@ -49,5 +51,12 @@ export function fetchCategories() {
 export function tendersRequest() {
   return {
     type: TENDERS_REQUESTED
+  }
+}
+
+export function createTenderRequest(payload) {
+  return {
+    type: CREATE_TENDER_REQUESTED,
+    payload
   }
 }

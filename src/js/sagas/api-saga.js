@@ -1,5 +1,8 @@
 import { takeEvery, call, put, push } from "redux-saga/effects"
 import * as api from './../api/api.js'
+
+import { tendersRequest } from "./../actions/index"
+
 import { AUTH_REQUESTED,
   AUTH_RECEIVED,
   LOGOUT_REQUESTED,
@@ -13,7 +16,9 @@ import { AUTH_REQUESTED,
   CATEGORIES_REQUESTED,
   CATEGORIES_RECEIVED,
   TENDERS_RECEIVED,
-  TENDERS_REQUESTED
+  TENDERS_REQUESTED,
+  CREATE_TENDER_REQUESTED,
+  CREATE_TENDER_RECEIVED
 } from "../constants/action-types"
 
 export default function* watcherSaga() {
@@ -24,6 +29,7 @@ export default function* watcherSaga() {
   yield takeEvery(USERS_REQUESTED, fetchUsers)
   yield takeEvery(CATEGORIES_REQUESTED, fetchCategories)
   yield takeEvery(TENDERS_REQUESTED, fetchTenders)
+  yield takeEvery(CREATE_TENDER_REQUESTED, createTender)
 }
 
 function* processSignIn(action) {
@@ -60,3 +66,10 @@ function* fetchTenders() {
   const response = yield call(api.getTenders)
   yield put({ type: TENDERS_RECEIVED, response: response })
 }
+
+function* createTender(action) {
+  const response = yield call(api.createTender, action.payload)
+  yield put({ type: CREATE_TENDER_RECEIVED, response: response })
+  yield put(tendersRequest())
+}
+

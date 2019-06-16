@@ -26,13 +26,13 @@ const Body = styled.div`
 function mapDispatchToProps(dispatch) {
   return {
     sessionRestore: params => dispatch(requestSessionRestore()),
-    fetchCategories: params => dispatch(fetchCategories()),
+    fetchCategories: () => dispatch(fetchCategories()),
     fetchTenders: () => dispatch(tendersRequest())
   };
 }
 
 function mapStateToProps(state) {
-  const { user, userCreated } = state
+  const { user } = state
   return { user: user }
 }
 

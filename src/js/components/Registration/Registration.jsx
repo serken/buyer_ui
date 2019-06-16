@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import styled from 'styled-components'
 import { createUserRequest } from "./../../actions/index"
 import { connect } from "react-redux"
-import Button from './../shared/Button.jsx'
 import { Redirect } from 'react-router-dom'
 import { Formik, Field, ErrorMessage } from 'formik'
 import { Form } from './Form.jsx'

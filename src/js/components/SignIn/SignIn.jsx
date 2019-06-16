@@ -19,10 +19,6 @@ const ContentBody = styled.div`
   }
 `
 
-const StyledInput = styled.input`
-  border: ${props => props.error ? "1px solid red" : "none"}
-`
-
 function mapDispatchToProps(dispatch) {
   return {
     signIn: params => dispatch(requestSignIn(params))
@@ -41,20 +37,10 @@ class SignIn extends Component {
       },
       redirect: false
     }
-    this.onLoginChange = this.onLoginChange.bind(this)
-    this.onPasswordChange = this.onPasswordChange.bind(this)
     this.onSignIn = this.onSignIn.bind(this)
   }
 
   componentDidMount() {
-  }
-
-  onLoginChange(input) {
-    this.setState({login: input.target.value})
-  }
-
-  onPasswordChange(input) {
-    this.setState({password: input.target.value})
   }
 
   onSignIn(values, actions) {

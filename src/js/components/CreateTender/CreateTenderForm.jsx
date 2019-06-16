@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import styled from 'styled-components'
 import { connect } from "react-redux"
 import { Formik, Field, ErrorMessage } from 'formik'
+import { Redirect } from 'react-router-dom'
+import { createTenderRequest } from "./../../actions/index"
 import { Form } from './Form.jsx'
 
 const ContentBody = styled.div`
@@ -26,14 +28,32 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    createTender: params => dispatch(createTenderRequest(params))
   };
 }
 
 class CreateTenderForm extends Component {
+  constructor(){
+    super()
+    this.state = {
+      redirect: false
+    }
+    this.createTender = this.createTender.bind(this)
+  }
+
+  createTender(values, actions) {
+    this.setState({redirect: true})
+    this.props.createTender(values)
+  }
+
   render() {
+    if (this.state.redirect) {
+      return <Redirect push to="/" />
+    }
+    let categories = this.props.categories
     return (
       <ContentBody>
-        <Formik render={props => <Form {...props} />}/>
+        <Formik onSubmit={this.createTender} render={props => <Form {...props} categories={categories} />}/>
       </ContentBody>
     );
   }

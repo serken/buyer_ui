@@ -5,8 +5,10 @@ import {
   CREATE_USER_RECEIVED,
   USERS_RECEIVED,
   CATEGORIES_RECEIVED,
-  TENDERS_RECEIVED
+  TENDERS_RECEIVED,
+  CREATE_TENDER_RECEIVED
 } from "../constants/action-types";
+
 
 const initialState = {
   user: null,

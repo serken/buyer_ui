@@ -50,3 +50,7 @@ export const getCategories = function() {
 export const getTenders = function() {
   return makeRequest('tenders')
 }
+
+export const createTender = function(payload) {
+  return makeRequest('tenders', 'POST', payload)
+}

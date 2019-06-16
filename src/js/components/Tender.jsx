@@ -2,6 +2,13 @@ import React, { Component } from "react";
 import styled from 'styled-components'
 import { connect } from "react-redux"
 
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import { find } from 'lodash'
+
 const ContentBody = styled.div`
   flex: 1;
   display: flex;
@@ -10,19 +17,11 @@ const ContentBody = styled.div`
   background-color: rgba(100,100,100,0.5);
   min-height: 500px;
   text-align: center;
-
-  table {
-    border-collapse: collapse;
-  }
-
-  td {
-    border: 1px solid;
-  }
 `
 
 function mapStateToProps(state) {
-  const { tenders, user } = state
-  return { tenders: tenders, user: user }
+  const { tenders, user, users } = state
+  return { tenders: tenders, user: user, users: users }
 }
 
 function mapDispatchToProps(dispatch) {
@@ -42,26 +41,26 @@ class Tender extends Component {
     let keys = Object.keys(this.props.tenders[0] || [])
     return (
       <ContentBody>
-        <div>Tender List</div><br />
+        <div>Tennders List</div><br />
         { this.props.user &&
           <div><br />
-            <table>
-            <thead>
+            <Table>
+            <TableHead>
 
                {keys.map((key, v) => {
-                  return <th>{key}</th>
+                  return <TableCell key={key}>{key}</TableCell>
                })
 
                }
-            </thead>
+            </TableHead>
             {this.props.tenders.map((u, i) => {
-               return <tbody><tr>
+               return <TableBody key={`${u.id}${u.title}`}><TableRow>
                   {keys.map((key, v) => {
-                    return <td>{u[key]}</td>
+                    return <TableCell key={`${u.id}${key}`}>{u[key]}</TableCell>
                   })}
-                  </tr></tbody>
+                  </TableRow></TableBody>
             })}
-            </table>
+            </Table>
           </div>
         }
       </ContentBody>

@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import styled from 'styled-components'
 import { connect } from "react-redux"
 import { usersRequest } from "../actions/index"
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
 
 const ContentBody = styled.div`
   flex: 1;
@@ -11,14 +16,6 @@ const ContentBody = styled.div`
   background-color: rgba(100,100,100,0.5);
   min-height: 500px;
   text-align: center;
-
-  table {
-    border-collapse: collapse;
-  }
-
-  td {
-    border: 1px solid;
-  }
 `
 
 function mapStateToProps(state) {
@@ -48,23 +45,23 @@ class Users extends Component {
         <div>Users List</div><br />
         { this.props.user &&
           <div><br />
-            <table>
-            <thead>
+            <Table>
+            <TableHead>
 
                {keys.map((key, v) => {
-                  return <th>{key}</th>
+                  return <TableCell>{key}</TableCell>
                })
 
                }
-            </thead>
+            </TableHead>
             {this.props.users.map((u, i) => {
-               return <tbody><tr>
+               return <TableBody><TableRow>
                   {keys.map((key, v) => {
-                    return <td>{u[key]}</td>
+                    return <TableCell>{u[key]}</TableCell>
                   })}
-                  </tr></tbody>
+                  </TableRow></TableBody>
             })}
-            </table>
+            </Table>
           </div>
         }
       </ContentBody>

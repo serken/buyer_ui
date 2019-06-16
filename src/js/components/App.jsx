@@ -2,14 +2,15 @@ import React, { Component } from "react"
 import Header from "./Header.jsx"
 import Footer from "./Footer.jsx"
 import Content from "./Content.jsx"
-import SignInForm from "./SignInForm.jsx"
-import Registration from "./Registration.jsx"
+import SignIn from "./SignIn/SignIn.jsx"
+import Registration from "./Registration/Registration.jsx"
 import Users from "./Users.jsx"
 import Tender from "./Tender.jsx"
+import CreateTenderForm from "./CreateTender/CreateTenderForm.jsx"
 
 import { connect } from "react-redux"
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
-import { requestSessionRestore, fetchCategories } from "../actions/index"
+import { requestSessionRestore, fetchCategories, tendersRequest } from "../actions/index"
 
 import styled from 'styled-components'
 
@@ -25,7 +26,8 @@ const Body = styled.div`
 function mapDispatchToProps(dispatch) {
   return {
     sessionRestore: params => dispatch(requestSessionRestore()),
-    fetchCategories: params => dispatch(fetchCategories())
+    fetchCategories: params => dispatch(fetchCategories()),
+    fetchTenders: () => dispatch(tendersRequest())
   };
 }
 
@@ -42,6 +44,7 @@ class App extends Component {
   componentWillMount() {
     this.props.sessionRestore()
     this.props.fetchCategories()
+    this.props.fetchTenders()
   }
 
   render() {
@@ -50,10 +53,11 @@ class App extends Component {
       <Body>
         <Header user={this.props.user}/>
         <Route exact path="/" component={Content} />
-        <Route exact path="/sign_in" component={SignInForm} />
+        <Route exact path="/sign_in" component={SignIn} />
         <Route exact path="/registration" component={Registration} />
         <Route exact path="/users" component={Users} />
         <Route exact path="/tenders" component={Tender} />
+        <Route exact path="/create_tender" component={CreateTenderForm} />
         <Footer />
       </Body>
       </BrowserRouter>

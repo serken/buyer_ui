@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import styled from 'styled-components'
 import { connect } from "react-redux"
-import Button from './shared/Button.jsx'
+import Button from "@material-ui/core/Button"
+import { Link } from 'react-router-dom';
 //import Button from '@material-ui/core/Button';
 
 import { requestSignOut } from "../actions/index"
@@ -30,20 +31,24 @@ class Header extends Component {
   render() {
     return (
       <HeaderBody>
-        <Button to='/'>Home</Button>
+        <Button variant="contained" component={Link} to='/'>Home</Button>
         { !this.props.user &&
-          <Button to='/sign_in'>Sign In</Button>
+          <Button variant="contained" component={Link} to='/sign_in'>Sign In</Button>
         }
         { !this.props.user &&
-          <Button to='/registration'>Register</Button>
+          <Button variant="contained" component={Link} to='/registration'>Register</Button>
         }
         { this.props.user &&
-          <Button onClick={this.props.signOut} to="/">Sign out</Button>
+          <Button variant="contained" component={Link} onClick={this.props.signOut} to="/">Sign out</Button>
         }
         { this.props.user &&
-          <Button to="/users">Users list</Button>
+          <Button variant="contained" component={Link} to="/users">Users list</Button>
         }
-        <Button to='/tenders'>Tenders</Button>
+        <Button variant="contained" component={Link} to='/tenders'>Tenders</Button>
+
+        { this.props.user &&
+          <Button variant="contained" component={Link} to="/create_tender">Create Tender</Button>
+        }
       </HeaderBody>
     );
   }

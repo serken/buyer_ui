@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import styled from 'styled-components'
 import { connect } from "react-redux"
-import { tendersRequest } from "../actions/index"
 
 const ContentBody = styled.div`
   flex: 1;
@@ -28,7 +27,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchTenders: () => dispatch(tendersRequest())
   };
 }
 
@@ -38,7 +36,6 @@ class Tender extends Component {
   }
 
   componentWillMount() {
-    this.props.fetchTenders()
   }
 
   render() {

@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import styled , { css } from 'styled-components'
-import { requestSignIn } from "../actions/index"
+import { requestSignIn } from "./../../actions/index"
 import { connect } from "react-redux"
-import Button from './shared/Button.jsx'
 import { Redirect } from 'react-router-dom'
+
+import { Formik, Field, ErrorMessage } from 'formik'
+import { Form } from './Form.jsx'
 
 const ContentBody = styled.div`
   flex: 1;
@@ -12,6 +14,9 @@ const ContentBody = styled.div`
   border-bottom: 2px solid #D8D8D8;
   background-color: rgba(100,100,100,0.5);
   min-height: 500px;
+  form {
+    width: 500px;
+  }
 `
 
 const StyledInput = styled.input`
@@ -24,7 +29,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-class Form extends Component {
+class SignIn extends Component {
   constructor() {
     super()
     this.state = {
@@ -52,14 +57,9 @@ class Form extends Component {
     this.setState({password: input.target.value})
   }
 
-  onSignIn(e) {
-    if(this.state.login == '' || this.state.password == ''){
-      this.setState({ errors: { login: this.state.login == '', password: this.state.errors.password == '' }})
-      this.setState({redirect: false})
-    } else {
-      this.props.signIn(this.state)
-      this.setState({redirect: true})
-    }
+  onSignIn(values, actions) {
+    this.props.signIn(values)
+    this.setState({redirect: true})
   }
 
   render() {
@@ -68,15 +68,11 @@ class Form extends Component {
     }
     return (
       <ContentBody>
-        <div>
-          login/email: <StyledInput error={this.state.errors.login} value={this.state.login} onChange={this.onLoginChange}/><br/>
-          password: <StyledInput error={this.state.errors.password} value={this.state.password} onChange={this.onPasswordChange}/><br/>
-          <Button onClick={this.onSignIn}> Submit</Button>
-        </div>
+        <Formik onSubmit={this.onSignIn} render={props => <Form {...props} />}/>
       </ContentBody>
     );
   }
 }
 
-const SignInForm = connect(null, mapDispatchToProps)(Form)
-export default SignInForm
+SignIn = connect(null, mapDispatchToProps)(SignIn)
+export default SignIn

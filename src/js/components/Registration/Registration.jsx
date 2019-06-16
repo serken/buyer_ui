@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import styled from 'styled-components'
-import { createUserRequest } from "../actions/index"
+import { createUserRequest } from "./../../actions/index"
 import { connect } from "react-redux"
-import Button from './shared/Button.jsx'
+import Button from './../shared/Button.jsx'
 import { Redirect } from 'react-router-dom'
+import { Formik, Field, ErrorMessage } from 'formik'
+import { Form } from './Form.jsx'
 
 const ContentBody = styled.div`
   flex: 1;
@@ -12,6 +14,9 @@ const ContentBody = styled.div`
   border-bottom: 2px solid #D8D8D8;
   background-color: rgba(100,100,100,0.5);
   min-height: 500px;
+  form {
+    width: 500px;
+  }
 `
 
 function mapDispatchToProps(dispatch) {
@@ -20,7 +25,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-class Form extends Component {
+class RegistrationForm extends Component {
   constructor() {
     super()
     this.state = {
@@ -50,13 +55,9 @@ class Form extends Component {
     this.setState({password: input.target.value})
   }
 
-  createUser(e) {
-    if(this.state.login == '' || this.state.password == '' || this.state.email == ''){
-      this.setState({redirect: false})
-    } else {
-      this.setState({redirect: true})
-      this.props.createUser(this.state)
-    }
+  createUser(values, actions) {
+    this.setState({redirect: true})
+    this.props.createUser(values)
   }
 
   render() {
@@ -65,16 +66,11 @@ class Form extends Component {
     }
     return (
       <ContentBody>
-        <div>
-          login: <input value={this.state.login} onChange={this.onLoginChange}/><br/>
-          email: <input value={this.state.email} onChange={this.onEmailChange}/><br/>
-          password: <input value={this.state.password} onChange={this.onPasswordChange}/><br/>
-          <Button onClick={this.createUser}> Submit</Button>
-        </div>
+        <Formik onSubmit={this.createUser} render={props => <Form {...props} />}/>
       </ContentBody>
     );
   }
 }
 
-const Registration = connect(null, mapDispatchToProps)(Form)
+const Registration = connect(null, mapDispatchToProps)(RegistrationForm)
 export default Registration

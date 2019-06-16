@@ -58,7 +58,6 @@ class App extends Component {
         <Route exact path="/users" component={Users} />
         <Route exact path="/tenders" component={Tender} />
         <Route exact path="/create_tender" component={CreateTenderForm} />
-        <Footer />
       </Body>
       </BrowserRouter>
     );

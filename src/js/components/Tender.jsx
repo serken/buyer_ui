@@ -7,6 +7,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import { Link } from 'react-router-dom';
 import { find } from 'lodash'
 
 const ContentBody = styled.div`
@@ -17,6 +18,10 @@ const ContentBody = styled.div`
   background-color: rgba(100,100,100,0.5);
   min-height: 500px;
   text-align: center;
+
+  .tableRow {
+    text-decoration: none !important
+  }
 `
 
 function mapStateToProps(state) {
@@ -54,7 +59,7 @@ class Tender extends Component {
                }
             </TableHead>
             {this.props.tenders.map((u, i) => {
-               return <TableBody key={`${u.id}${u.title}`}><TableRow>
+               return <TableBody key={`${u.id}${u.title}`}><TableRow classes={{root: 'tableRow'}} hover component={Link} to={`/tenders/${u.id}`}>
                   {keys.map((key, v) => {
                     return <TableCell key={`${u.id}${key}`}>{u[key]}</TableCell>
                   })}

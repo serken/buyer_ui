@@ -5,7 +5,7 @@ import Content from "./Content.jsx"
 import SignIn from "./SignIn/SignIn.jsx"
 import Registration from "./Registration/Registration.jsx"
 import Users from "./Users.jsx"
-import Tender from "./Tender.jsx"
+import TenderList from "./Tender/TenderList.jsx"
 import CreateTenderForm from "./CreateTender/CreateTenderForm.jsx"
 
 import { connect } from "react-redux"
@@ -15,7 +15,6 @@ import { requestSessionRestore, fetchCategories, tendersRequest } from "../actio
 import styled from 'styled-components'
 
 const Body = styled.div`
-  display: flex;
   flex: 1;
   flex-direction: column;
   position: absolute;
@@ -56,7 +55,7 @@ class App extends Component {
         <Route exact path="/sign_in" component={SignIn} />
         <Route exact path="/registration" component={Registration} />
         <Route exact path="/users" component={Users} />
-        <Route exact path="/tenders" component={Tender} />
+        <Route exact path="/tenders" component={TenderList} />
         <Route exact path="/create_tender" component={CreateTenderForm} />
       </Body>
       </BrowserRouter>

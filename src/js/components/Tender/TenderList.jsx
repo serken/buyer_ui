@@ -34,7 +34,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-class Tender extends Component {
+class TenderList extends Component {
   constructor(){
     super()
   }
@@ -47,7 +47,6 @@ class Tender extends Component {
     return (
       <ContentBody>
         <div>Tennders List</div><br />
-        { this.props.user &&
           <div><br />
             <Table>
             <TableHead>
@@ -67,9 +66,8 @@ class Tender extends Component {
             })}
             </Table>
           </div>
-        }
       </ContentBody>
     );
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Tender);
+export default connect(mapStateToProps, mapDispatchToProps)(TenderList);

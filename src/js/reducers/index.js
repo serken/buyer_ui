@@ -6,7 +6,8 @@ import {
   USERS_RECEIVED,
   CATEGORIES_RECEIVED,
   TENDERS_RECEIVED,
-  CREATE_TENDER_RECEIVED
+  CREATE_TENDER_RECEIVED,
+  TENDER_RECEIVED
 } from "../constants/action-types";
 
 
@@ -15,7 +16,8 @@ const initialState = {
   userCreated: null,
   users: [],
   categories: [],
-  tenders: []
+  tenders: [],
+  selectedTender: null
 };
 
 function rootReducer(state = initialState, action) {
@@ -60,6 +62,17 @@ function rootReducer(state = initialState, action) {
     }
     return Object.assign({}, state, {
       categories: action.response
+    });
+  }
+
+  if(action.type === TENDER_RECEIVED) {
+    if(action.response.error) {
+      return Object.assign({}, state, {
+        selectedTender: null
+      });
+    }
+    return Object.assign({}, state, {
+      selectedTender: action.response
     });
   }
 

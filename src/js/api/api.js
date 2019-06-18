@@ -47,8 +47,12 @@ export const getCategories = function() {
   return makeRequest('categories')
 }
 
-export const getTenders = function() {
-  return makeRequest('tenders')
+export const getTenders = function(payload = {}) {
+  let url = 'tenders'
+  if(payload.id){
+    url += `/${payload.id}`
+  }
+  return makeRequest(url)
 }
 
 export const createTender = function(payload) {

@@ -6,6 +6,7 @@ import SignIn from "./SignIn/SignIn.jsx"
 import Registration from "./Registration/Registration.jsx"
 import Users from "./Users.jsx"
 import TenderList from "./Tender/TenderList.jsx"
+import Tender from "./Tender/Tender.jsx"
 import CreateTenderForm from "./CreateTender/CreateTenderForm.jsx"
 
 import { connect } from "react-redux"
@@ -49,15 +50,16 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-      <Body>
-        <Header user={this.props.user}/>
-        <Route exact path="/" component={Content} />
-        <Route exact path="/sign_in" component={SignIn} />
-        <Route exact path="/registration" component={Registration} />
-        <Route exact path="/users" component={Users} />
-        <Route exact path="/tenders" component={TenderList} />
-        <Route exact path="/create_tender" component={CreateTenderForm} />
-      </Body>
+        <Body>
+          <Header user={this.props.user}/>
+          <Route exact path="/" component={Content} />
+          <Route exact path="/sign_in" component={SignIn} />
+          <Route exact path="/registration" component={Registration} />
+          <Route exact path="/users" component={Users} />
+          <Route exact path="/tenders/" component={TenderList} />
+          <Route exact path="/tenders/:tenderId" component={Tender} />
+          <Route exact path="/create_tender" component={CreateTenderForm} />
+        </Body>
       </BrowserRouter>
     );
   }

@@ -34,6 +34,7 @@ class Header extends Component {
         { !this.props.user &&
           <Button variant="contained" component={Link} to='/sign_in'>Sign In</Button>
         }
+
         { !this.props.user &&
           <Button variant="contained" component={Link} to='/registration'>Register</Button>
         }
